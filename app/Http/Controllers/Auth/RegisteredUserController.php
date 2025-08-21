@@ -16,14 +16,6 @@ use Inertia\Response;
 class RegisteredUserController extends Controller
 {
     /**
-     * Show the registration page.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('auth/register');
-    }
-
-    /**
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
