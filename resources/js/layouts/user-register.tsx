@@ -1,6 +1,6 @@
 export default function UserRegisterLayout({ children }) {
     return (
-        <div className="flex flex-col items-center justify-center text-center min-h-screen bg-[#FDFDFC] px-8 md:px-0">
+        <div className="flex flex-col items-center justify-center text-center min-h-screen bg-[#FDFDFC] px-8 md:px-0 opacity-100 transition-opacity duration-750 grow starting:opacity-0">
             <div className="w-fit">
                 {children}
             </div>

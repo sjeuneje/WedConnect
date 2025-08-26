@@ -13,9 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $seeders = [
-            CountrySeeder::class
-        ];
+        $seeders = [];
 
         foreach ($seeders as $seeder) {
             (new $seeder)->run();

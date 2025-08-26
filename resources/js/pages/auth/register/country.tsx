@@ -1,18 +1,26 @@
-import MultiSelect from "@/components/ui/multi-select";
+import {CountryMultiSelect} from "@/components/ui/multi-select";
 import Logo from "@/components/logo";
-import {Head} from "@inertiajs/react";
-import StepInfo from "@/components/register/step-info";
+import {Head, router} from "@inertiajs/react";
+import StepInfo from "@/components/auth/step-info";
 import UserRegisterLayout from "@/layouts/user-register";
 import {useState} from "react";
-import StepNavigation from "@/components/register/step-navigation";
+import StepNavigation from "@/components/auth/step-navigation";
+
+type Country = {
+    id: number;
+    label: string;
+    value: string;
+    created_at?: string;
+    updated_at?: string;
+};
 
 type Props = {
-    countries: object[],
+    countries: Country[],
     totalSteps: number,
     currentStep: number,
     nextStepHref: string,
     previousStepHref: string
-}
+};
 
 export default function RegisterCountry({
     countries,
@@ -21,9 +29,19 @@ export default function RegisterCountry({
     nextStepHref,
     previousStepHref
 }: Props) {
-    const [selectedCountries, setSelectedCountries] = useState<string[]>(
-        countries.length > 0 ? [countries[0].value] : []
+    const [selectedCountry, setSelectedCountry] = useState<string>(
+        countries.length > 0 ? countries[0].value : ''
     );
+
+    const saveData = () => {
+        const params = Object.fromEntries(new URLSearchParams(window.location.search));
+        params.country = selectedCountry;
+        router.visit(route(nextStepHref, params));
+    };
+
+    const goPrevious = () => {
+        router.visit(route(previousStepHref));
+    }
 
     return (
         <>
@@ -36,10 +54,10 @@ export default function RegisterCountry({
                     description="Veuillez sélectionner dans quel pays vous résidez actuellement."
                 />
                 <div className="flex justify-center items-center mt-4">
-                    <MultiSelect
+                    <CountryMultiSelect
                         countries={countries}
-                        selected={selectedCountries}
-                        onChange={setSelectedCountries}
+                        selected={selectedCountry}
+                        onChange={setSelectedCountry}
                     />
                 </div>
                 <div className="flex justify-center items-center mt-8">
@@ -47,10 +65,10 @@ export default function RegisterCountry({
                         showSteps={true}
                         totalSteps={totalSteps}
                         previousStepText="Retour&nbsp;"
-                        previousStepHref={route(previousStepHref)}
                         nextStepText="Suivant"
-                        nextStepHref={route(nextStepHref)}
                         currentStep={currentStep}
+                        actionAfterNextStep={saveData}
+                        actionAfterPreviousStep={goPrevious}
                     />
                 </div>
             </UserRegisterLayout>
