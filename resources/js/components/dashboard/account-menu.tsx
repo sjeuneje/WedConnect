@@ -20,7 +20,7 @@ export default function AccountMenu() {
     }, []);
 
     return (
-        <div className="relative" ref={menuRef}>
+        <div className="relative text-sm" ref={menuRef}>
             <div
                 className="cursor-pointer flex items-center gap-x-1 text-slate-700 font-semibold"
                 onClick={() => setIsOpen(!isOpen)}

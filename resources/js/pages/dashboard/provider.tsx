@@ -80,7 +80,7 @@ export default function DashboardProvider({ user, currentRoute }: Props) {
             <Topbar currentPage={currentPage} />
             <Sidebar logoHref={route('dashboard.provider')} pages={pages} />
             <DashboardLayout>
-                <h1 className="text-md">Bonjour <span className="font-semibold">{user.provider.company_name}</span>.</h1>
+                <h1 className="text-sm">Bonjour <span className="font-semibold">{user.provider.company_name}</span>.</h1>
             </DashboardLayout>
         </>
     );
