@@ -13,6 +13,7 @@ class DashboardProviderController extends Controller
     {
         return Inertia::render('dashboard/provider', [
             'user' => User::with('provider')->findOrFail(Auth::id()),
+            'currentRoute' => request()->route()->getName()
         ]);
     }
 }

@@ -15,7 +15,11 @@ Route::middleware('guest')->group(function () {
     });
 
     Route::prefix('login')->group(function () {
-        Route::post('', [LoginController::class, 'store'])->name('login.store');
+        Route::post('', [LoginController::class, 'store'])->name('login');
         Route::get('', [LoginController::class, 'create'])->name('login.create');
     });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 });

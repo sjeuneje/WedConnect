@@ -18,7 +18,7 @@ export default function Login({ flash, errors }) {
             password: password
         }
 
-        router.post(route('login.store'), credentials);
+        router.post(route('login'), credentials);
     }
 
     return (
