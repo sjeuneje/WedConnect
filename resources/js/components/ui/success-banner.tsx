@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 type Props = {
     message: string;
-    duration?: number; // optionnel : auto-hide après X ms
+    duration?: number;
 };
 
 export default function SuccessBanner({ message, duration = 5000 }: Props) {

@@ -43,7 +43,7 @@ class RegisterController extends Controller
         }
 
         return redirect()
-            ->route('home')
+            ->route('login.create')
             ->with([
                 'success' => 'Inscription réussie, bienvenue chez WedConnect !'
             ]);
