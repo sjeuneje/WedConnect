@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import DashboardLayout from "@/layouts/dashboard";
 import Sidebar from "@/components/dashboard/sidebar";
 import Topbar from "@/components/dashboard/topbar";
-import {Home, LucideIcon} from "lucide-react";
+import {Activity, Briefcase, Home, LucideIcon, Settings} from "lucide-react";
 import {JSX} from "react";
 
 export type Provider = {
@@ -49,6 +49,21 @@ const pages: Page[] = [
         name: 'Tableau de bord',
         href: 'dashboard.provider',
         icon: <Home />
+    },
+    {
+        name: 'Mon activité',
+        href: 'dashboard.provider',
+        icon: <Activity />
+    },
+    {
+        name: 'Mes services',
+        href: 'dashboard.provider',
+        icon: <Briefcase />
+    },
+    {
+        name: 'Paramètres',
+        href: 'dashboard.provider',
+        icon: <Settings />
     }
 ];
 
@@ -63,7 +78,7 @@ export default function DashboardProvider({ user, currentRoute }: Props) {
         <>
             <Head title="Tableau de bord" />
             <Topbar currentPage={currentPage} />
-            <Sidebar logoHref={route('dashboard.provider')} />
+            <Sidebar logoHref={route('dashboard.provider')} pages={pages} />
             <DashboardLayout>
                 <h1 className="text-md">Bonjour <span className="font-semibold">{user.provider.company_name}</span>.</h1>
             </DashboardLayout>
