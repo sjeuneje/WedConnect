@@ -108,7 +108,7 @@ export default function DashboardProvider({ user, currentRoute }: Props) {
         <>
             <Head title="Tableau de bord" />
             <Topbar currentPage={currentPage} showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-            <Sidebar show={showSidebar} setShow={setShowSidebar} logoHref={route('dashboard.provider')} pages={pages} />
+            <Sidebar show={showSidebar} setShow={setShowSidebar} logoHref={route('dashboard.provider')} currentPage={currentPage} pages={pages} />
             <DashboardLayout>
                 <h1 className="text-sm">Bonjour <span className="font-semibold">{user.provider.company_name}</span>.</h1>
             </DashboardLayout>

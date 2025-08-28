@@ -7,10 +7,11 @@ import {Page} from "@/pages/dashboard/provider";
 type Props = {
     show: boolean,
     logoHref: string,
+    currentPage: Page,
     pages: Page[]
 }
 
-export default function Sidebar({ show, setShow, logoHref, pages }: Props) {
+export default function Sidebar({ show, setShow, logoHref, currentPage, pages }: Props) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => setMounted(true), []);
@@ -24,7 +25,7 @@ export default function Sidebar({ show, setShow, logoHref, pages }: Props) {
             <div className="p-2 mt-4">
                 <ul className="flex flex-col gap-y-4">
                     {pages.map((page: Page, key) => (
-                        <li className={`cursor-pointer hover:bg-white/20 ${show ? (page.showOnDesktop ? 'flex' : 'md:hidden') : 'flex'} items-center gap-y-12 text-sm px-4 py-2 rounded-lg`} key={key}>
+                        <li className={`cursor-pointer ${currentPage.name === page.name ? 'bg-white/20' : 'hover:bg-white/20'} ${show ? (page.showOnDesktop ? 'flex' : 'md:hidden') : 'flex'} items-center gap-y-12 text-sm px-4 py-2 rounded-lg`} key={key}>
                             <Link method={page.method} href={route(page.href)} className="flex items-center gap-x-2 text-white font-semibold">
                                 {React.cloneElement(page.icon, { className: "w-4 h-4" })}
                                 <span className="mt-[1px]">{page.name}</span>
