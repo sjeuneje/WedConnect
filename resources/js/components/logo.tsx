@@ -3,13 +3,14 @@ import { Link } from "@inertiajs/react";
 type Props = {
     href?: string;
     darkTheme?: boolean;
+    className: string;
 };
 
-export default function Logo({ href = '/', darkTheme = false }: Props) {
+export default function Logo({ href = '/', darkTheme = false, className = ' ' }: Props) {
     const fillColor = darkTheme ? '#FFFFFF' : '#000000';
 
     return (
-        <Link href={href} className="flex justify-center items-center gap-x-1">
+        <Link href={href} className={`flex justify-center items-center gap-x-1 ${className}`}>
             <svg
                 width="24px"
                 height="24px"

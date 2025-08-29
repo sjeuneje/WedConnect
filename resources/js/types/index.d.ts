@@ -1,43 +1,38 @@
-import { LucideIcon } from 'lucide-react';
-import type { Config } from 'ziggy-js';
+import {JSX} from "react";
 
-export interface Auth {
-    user: User;
-}
-
-export interface BreadcrumbItem {
-    title: string;
-    href: string;
-}
-
-export interface NavGroup {
-    title: string;
-    items: NavItem[];
-}
-
-export interface NavItem {
-    title: string;
-    href: string;
-    icon?: LucideIcon | null;
-    isActive?: boolean;
-}
-
-export interface SharedData {
-    name: string;
-    quote: { message: string; author: string };
-    auth: Auth;
-    ziggy: Config & { location: string };
-    sidebarOpen: boolean;
-    [key: string]: unknown;
-}
-
-export interface User {
+export type Provider = {
     id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
+    user_id: number;
+    company_name: string;
+    logo: string | null;
+    city: string | null;
+    zipcode: string | null;
+    description: string | null;
+    facebook_url: string | null;
+    instagram_url: string | null;
+    website_url: string | null;
+    trial_end_at: string | null;
+    published_at: string | null;
     created_at: string;
     updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
-}
+};
+
+export type User = {
+    id: number;
+    email: string;
+    country: string;
+    phone_number: string;
+    phone_verified: boolean | 0 | 1;
+    role: 'provider';
+    created_at: string;
+    updated_at: string;
+    provider: Provider;
+};
+
+export type Page = {
+    name: string;
+    href: string;
+    icon: JSX.Element;
+    showOnDesktop: boolean;
+    method: string;
+};
