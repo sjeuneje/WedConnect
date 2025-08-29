@@ -5,18 +5,20 @@ import {router, useForm} from "@inertiajs/react";
 type FormData = {
     phone_number?: string;
     password?: string;
-    password_confirmation?: string;
+    new_password: string;
+    new_password_confirmation?: string;
 };
 
-export default function SettingsUserTabProvider({ user }) {
+export default function SettingsUserTabProvider({ user, errors }) {
     const form = useForm<FormData>({
         phone_number: user.phone_number,
         password: '',
-        password_confirmation: ''
+        new_password: '',
+        new_password_confirmation: ''
     });
 
     const updateUser = () => {
-        router.patch(route('dashboard.provider.settings.user'), form.data);
+        form.patch(route('dashboard.provider.settings.user'));
     }
 
     return (
@@ -31,10 +33,13 @@ export default function SettingsUserTabProvider({ user }) {
                         placeholder={user?.phone_number ? '' : '+32 XXX XX XX XX'}
                         value={form.data.phone_number}
                         onChange={(e) => form.setData('phone_number' as keyof FormData, e.target.value)}
+                        error={errors?.phone_number ? errors.phone_number : ''}
                         required
                     />
                 </div>
+            </div>
 
+            <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
                 <div className="w-[400px]">
                     <h2 className="text-[13px] font-semibold mb-2">Mot de passe</h2>
                     <p className="text-xs text-gray-500 max-w-[500px] mb-4">Modifiez votre mot de passe, cette action peut mener à une nouvelle confirmation de celui-ci.</p>
@@ -42,17 +47,28 @@ export default function SettingsUserTabProvider({ user }) {
                         <Input
                             id="password"
                             type="password"
-                            placeholder="Mot de passe"
+                            placeholder="Mot de passe actuel"
                             value={form.data.password}
                             onChange={(e) => form.setData('password' as keyof FormData, e.target.value)}
+                            error={errors?.password ? errors.password : ''}
                             required
                         />
                         <Input
-                            id="password_confirmation"
+                            id="new_password"
+                            type="password"
+                            placeholder="Nouveau mot de passe"
+                            value={form.data.new_password}
+                            onChange={(e) => form.setData('new_password' as keyof FormData, e.target.value)}
+                            error={errors?.new_password ? errors.new_password : ''}
+                            required
+                        />
+                        <Input
+                            id="new_password_confirmation"
                             type="password"
                             placeholder="Confirmation du mot de passe"
-                            value={form.data.password_confirmation}
-                            onChange={(e) => form.setData('password_confirmation' as keyof FormData, e.target.value)}
+                            value={form.data.new_password_confirmation}
+                            onChange={(e) => form.setData('new_password_confirmation' as keyof FormData, e.target.value)}
+                            error={errors?.new_password_confirmation ? errors.new_password_confirmation : ''}
                             required
                         />
                     </div>

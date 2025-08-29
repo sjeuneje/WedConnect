@@ -5,7 +5,7 @@ import UserRegisterLayout from "@/layouts/user-register";
 import Input from "@/components/ui/input";
 import PrimaryButton from "@/components/ui/buttons/primary";
 import {useState} from "react";
-import SuccessBanner from "@/components/ui/success-banner";
+import { SuccessBanner } from "@/components/ui/success-banner";
 
 export default function Login({ flash, errors }) {
     const [email, setEmail] = useState<string>();

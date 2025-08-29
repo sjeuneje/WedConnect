@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 
 class UpdateUserSettingsProviderRequest extends FormRequest
@@ -23,8 +24,18 @@ class UpdateUserSettingsProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone_number' => ['nullable', 'string', 'regex:/^(?:\+32[\s\-\(\)\.]*([0-9][\s\-\(\)\.]*){8,9}|0[1-9][0-9]{7,8})$/'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()]
+            'phone_number' => [
+                'nullable',
+                'string',
+                'regex:/^(?:\+32[\s\-\(\)\.]*([0-9][\s\-\(\)\.]*){8,9}|0[1-9][0-9]{7,8})$/'
+            ],
+            'password' => ['nullable', 'string'],
+            'new_password' => [
+                'nullable',
+                Rule::requiredIf(fn () => filled($this->password)),
+                'confirmed',
+                Rules\Password::defaults(),
+            ],
         ];
     }
 }

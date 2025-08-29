@@ -13,11 +13,11 @@ export const dashboardSettingsPages = [
         disabled: false,
         desc: "Modifiez les informations liées à votre activité."
     },
-    {
-        id: "subscription",
-        href: "dashboard.provider.settings",
-        name: "Abonnement",
-        disabled: true,
-        desc: "Modifiez vos informations personnelles et vos préférences de compte."
-    }
+    // {
+    //     id: "subscription",
+    //     href: "dashboard.provider.settings",
+    //     name: "Abonnement",
+    //     disabled: true,
+    //     desc: "Modifiez vos informations personnelles et vos préférences de compte."
+    // }
 ];

@@ -16,6 +16,7 @@ class Provider extends Model
         'description',
         'facebook_url',
         'instagram_url',
+        'website_url',
         'trial_end_at',
         'is_published',
     ];

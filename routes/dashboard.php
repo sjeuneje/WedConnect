@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('settings')->group(function () {
                 Route::get('', [SettingsProviderController::class, 'index'])->name('dashboard.provider.settings');
                 Route::patch('user', [SettingsProviderController::class, 'updateUser'])->name('dashboard.provider.settings.user');
+                Route::post('activity', [SettingsProviderController::class, 'updateActivity'])->name('dashboard.provider.settings.activity');
             });
         });
 

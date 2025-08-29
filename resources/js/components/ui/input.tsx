@@ -35,7 +35,7 @@ function BaseInput({ label, error, className = "", required = false, ...props }:
     );
 }
 
-function InputFile({ label, error, className = "", required = false, ...props }: Props) {
+function InputFile({ text = null, label, error, className = "", required = false, ...props }: Props) {
     const [fileName, setFileName] = useState<string | null>(null);
     const [inputKey, setInputKey] = useState<number>(Date.now());
 
@@ -68,7 +68,7 @@ function InputFile({ label, error, className = "", required = false, ...props }:
                     `}
                 >
                     <span className="truncate">
-                        {fileName ? fileName : "Sélectionner un fichier"}
+                        {!text ? (fileName ? fileName : "Sélectionner un fichier") : text}
                     </span>
                     <span className="ml-2 text-gray-500 text-xs">{fileName ? "Modifier" : ""}</span>
 

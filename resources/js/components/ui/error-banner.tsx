@@ -6,7 +6,7 @@ type Props = {
     duration?: number;
 };
 
-function SuccessBanner({ message, duration = 5000 }: Props) {
+function ErrorBanner({ message, duration = 5000 }: Props) {
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
