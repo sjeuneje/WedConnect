@@ -31,7 +31,7 @@ export default function Sidebar({ show, setShow, logoHref, currentPage, pages }:
                                 key={key}
                                 method={page.method}
                                 href={route(page.href)}
-                                className={`cursor-pointer ${currentPage.name === page.name ? 'bg-white/20' : 'hover:bg-white/20'} ${page.showOnDesktop ? 'flex' : 'md:hidden'} items-center gap-x-2 text-sm px-4 py-2 rounded-lg text-white font-semibold`}
+                                className={`cursor-pointer ${currentPage.name === page.name ? 'bg-white/20' : 'hover:bg-white/20'} ${page.showOnDesktop ? 'flex' : 'flex md:hidden'} items-center gap-x-2 text-sm px-4 py-2 rounded-lg text-white font-semibold`}
                             >
                                 {React.cloneElement(page.icon, { className: "w-4 h-4" })}
                                 <span className="mt-[1px]">{page.name}</span>

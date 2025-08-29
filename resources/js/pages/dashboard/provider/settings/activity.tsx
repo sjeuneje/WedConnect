@@ -38,8 +38,8 @@ export default function SettingsActivityTabProvider({ user, errors }) {
         <>
             <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
                 <div className="flex flex-col gap-y-6">
-                    <div className="flex gap-x-12 items-start">
-                        <div className="w-[400px] flex flex-col">
+                    <div className="flex flex-col md:flex-row gap-y-6 md:gap-y-0 gap-x-12 items-start">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Nom de votre activité</h2>
                             <p className="text-xs text-gray-500 mb-4">Modifiez le nom de votre activité, les changements seront visibles directement sur le profil de votre activité.</p>
                             <Input
@@ -50,7 +50,7 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                                 error={errors?.company_name ? errors.company_name : ''}
                             />
                         </div>
-                        <div className="w-[400px] flex flex-col">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">
                                 Logo{" "}
                                 {currentLogoUrl && (
@@ -77,8 +77,8 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                         </div>
                     </div>
 
-                    <div className="flex gap-x-12 items-start">
-                        <div className="w-[400px] flex flex-col">
+                    <div className="flex flex-col md:flex-row gap-y-6 md:gap-y-0 gap-x-12 items-start">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Votre ville</h2>
                             <p className="text-xs text-gray-500 mb-4">Modifiez la ville dans laquelle votre activité se base. Les informations que vous communiquez serviront à vous trouver sur notre plateforme.</p>
                             <Input
@@ -90,7 +90,7 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                                 error={errors?.city ? errors.city : ''}
                             />
                         </div>
-                        <div className="w-[400px] flex flex-col">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Code postal</h2>
                             <p className="text-xs text-gray-500 mb-4">Modifiez le code postal de votre ville. Les informations que vous communiquez serviront à vous trouver sur notre plateforme.</p>
                             <Input
@@ -104,7 +104,7 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                         </div>
                     </div>
 
-                    <div className="flex gap-x-12 items-start">
+                    <div className="flex flex-col md:flex-row gap-y-6 md:gap-y-0 gap-x-12 items-start">
                         <div className="w-full max-w-[850px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Description de votre activité</h2>
                             <p className="text-xs text-gray-500 mb-4">Décrivez votre activité le plus précisément possible.</p>
@@ -122,8 +122,8 @@ export default function SettingsActivityTabProvider({ user, errors }) {
             </div>
             <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
                 <div className="flex flex-col gap-y-6">
-                    <div className="flex gap-x-12 items-start">
-                        <div className="w-[400px] flex flex-col">
+                    <div className="flex flex-col md:flex-row gap-y-6 md:gap-y-0 gap-x-12 items-start">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Lien Facebook</h2>
                             <p className="text-xs text-gray-500 mb-4">Ajoutez le lien de votre page Facebook pour que vos clients puissent vous suivre et rester informés de vos actualités.</p>
                             <Input
@@ -135,7 +135,7 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                                 error={errors?.facebook_url ? errors.facebook_url : ''}
                             />
                         </div>
-                        <div className="w-[400px] flex flex-col">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Lien Instagram</h2>
                             <p className="text-xs text-gray-500 mb-4">Partagez le lien de votre profil Instagram pour mettre en avant vos publications et votre univers visuel.</p>
                             <Input
@@ -148,8 +148,8 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-x-12 items-start">
-                        <div className="w-[400px] flex flex-col">
+                    <div className="flex flex-col md:flex-row gap-y-6 md:gap-y-0 gap-x-12 items-start">
+                        <div className="w-full md:w-[400px] flex flex-col">
                             <h2 className="text-[13px] font-semibold mb-2">Lien de votre site web</h2>
                             <p className="text-xs text-gray-500 mb-4">Indiquez l’URL de votre site web pour que vos clients accèdent directement à vos services et informations en ligne.</p>
                             <Input
@@ -164,7 +164,7 @@ export default function SettingsActivityTabProvider({ user, errors }) {
                     </div>
                 </div>
             </div>
-            <div className="w-[400px] mt-8">
+            <div className="w-full md:w-[400px] mt-8">
                 <PrimaryButton onClick={updateActivity}>
                     Sauvegarder les changements
                 </PrimaryButton>

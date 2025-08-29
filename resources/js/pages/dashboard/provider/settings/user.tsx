@@ -24,7 +24,7 @@ export default function SettingsUserTabProvider({ user, errors }) {
     return (
         <>
             <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
-                <div className="w-[400px]">
+                <div className="w-full md:w-[400px]">
                     <h2 className="text-[13px] font-semibold mb-2">Numéro de téléphone</h2>
                     <p className="text-xs text-gray-500 max-w-[500px] mb-4">Modifiez votre numéro de téléphone, cette action peut mener à une nouvelle confirmation de celui-ci.</p>
                     <Input
@@ -40,7 +40,7 @@ export default function SettingsUserTabProvider({ user, errors }) {
             </div>
 
             <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
-                <div className="w-[400px]">
+                <div className="w-full md:w-[400px]">
                     <h2 className="text-[13px] font-semibold mb-2">Mot de passe</h2>
                     <p className="text-xs text-gray-500 max-w-[500px] mb-4">Modifiez votre mot de passe, cette action peut mener à une nouvelle confirmation de celui-ci.</p>
                     <div className="flex flex-col gap-y-2">
@@ -74,7 +74,7 @@ export default function SettingsUserTabProvider({ user, errors }) {
                     </div>
                 </div>
             </div>
-            <div className="w-[400px] mt-8">
+            <div className="w-full md:w-[400px] mt-8">
                 <PrimaryButton onClick={updateUser}>
                     Sauvegarder les changements
                 </PrimaryButton>
