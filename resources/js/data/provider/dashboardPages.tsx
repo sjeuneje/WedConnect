@@ -18,18 +18,18 @@ export const dashboardPages: Page[] = [
     },
     {
         name: 'Mes services',
-        href: 'dashboard.provider',
+        href: 'dashboard.provider.services',
         icon: <Briefcase />,
         showOnDesktop: true,
         method: 'get'
     },
-    {
-        name: 'Liste prestataires',
-        href: 'dashboard.provider',
-        icon: <List />,
-        showOnDesktop: true,
-        method: 'get'
-    },
+    // {
+    //     name: 'Listing prestataires',
+    //     href: 'dashboard.provider',
+    //     icon: <List />,
+    //     showOnDesktop: true,
+    //     method: 'get'
+    // },
     {
         name: 'Paramètres',
         href: 'dashboard.provider.settings',

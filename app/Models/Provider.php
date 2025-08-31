@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Providers\Services\Service;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Provider extends Model
 {
@@ -24,5 +27,10 @@ class Provider extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class);
     }
 }

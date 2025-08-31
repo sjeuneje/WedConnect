@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Couple\Dashboard\DashboardCoupleController;
 use App\Http\Controllers\Provider\Dashboard\DashboardProviderController;
+use App\Http\Controllers\Provider\Services\ServicesProviderController;
 use App\Http\Controllers\Provider\Settings\SettingsProviderController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ Route::middleware('auth')->group(function () {
                 Route::get('', [SettingsProviderController::class, 'index'])->name('dashboard.provider.settings');
                 Route::patch('user', [SettingsProviderController::class, 'updateUser'])->name('dashboard.provider.settings.user');
                 Route::post('activity', [SettingsProviderController::class, 'updateActivity'])->name('dashboard.provider.settings.activity');
+            });
+
+            Route::prefix('services')->group(function () {
+                Route::get('', [ServicesProviderController::class, 'index'])->name('dashboard.provider.services');
+                Route::post('', [ServicesProviderController::class, 'store'])->name('dashboard.provider.services.store');
             });
         });
 

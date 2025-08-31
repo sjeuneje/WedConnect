@@ -22,7 +22,7 @@ function BaseInput({ label, error, className = "", required = false, ...props }:
     return (
         <div className="flex flex-col w-full">
             {label && (
-                <label className="flex gap-x-[2px] text-sm font-medium mb-1 text-left" htmlFor={props.id}>
+                <label className="flex gap-x-[2px] text-[12px] font-medium mb-1 text-left" htmlFor={props.id}>
                     {label} <span className="text-red-500">{required && "*"}</span>
                 </label>
             )}
@@ -106,7 +106,7 @@ function TextArea({ label, error, className = "", required = false, ...props }: 
         <div className="flex flex-col w-full">
             {label && (
                 <label
-                    className="flex gap-x-[2px] text-sm font-medium mb-1 text-left"
+                    className="flex gap-x-[2px] text-[12px] font-medium mb-1 text-left"
                     htmlFor={props.id}
                 >
                     {label} <span className="text-red-500">{required && "*"}</span>
@@ -121,6 +121,28 @@ function TextArea({ label, error, className = "", required = false, ...props }: 
     );
 }
 
-const Input = Object.assign(BaseInput, { File: InputFile, TextArea: TextArea });
+function Select({ children, label, error, className = "", required = false, ...props }: Props) {
+    return (
+        <div className="flex flex-col w-full">
+            {label && (
+                <label
+                    className="flex gap-x-[2px] text-[12px] font-medium mb-1 text-left"
+                    htmlFor={props.id}
+                >
+                    {label} <span className="text-red-500">{required && "*"}</span>
+                </label>
+            )}
+            <select
+                {...props}
+                className={`px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-[12px] focus:outline-none focus:ring-1 focus:ring-gray-700 focus:border-gray-700 shadow-sm ${className}`}
+            >
+                {children}
+            </select>
+            {error && <span className="text-left text-red-500 text-xs mt-1">{error}</span>}
+        </div>
+    );
+}
+
+const Input = Object.assign(BaseInput, { File: InputFile, TextArea: TextArea, Select: Select });
 
 export default Input;
