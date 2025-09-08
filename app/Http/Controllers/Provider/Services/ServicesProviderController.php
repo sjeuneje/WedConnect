@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Provider\Services;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreServiceProviderRequest;
-use App\Models\Provider;
+use App\Http\Requests\Services\DeleteServiceProviderRequest;
+use App\Http\Requests\Services\StoreServiceProviderRequest;
 use App\Models\Providers\Services\OptionRate;
 use App\Models\Providers\Services\Service;
 use App\Models\Providers\Services\ServiceOption;
 use App\Models\Providers\Services\ServiceRate;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -74,5 +73,28 @@ class ServicesProviderController extends Controller
 
         return redirect()->route('dashboard.provider.services')
             ->with('success', 'Votre service a bien été crée.');
+    }
+
+    public function delete(DeleteServiceProviderRequest $request)
+    {
+        $provider = Auth::user()->provider;
+
+        if ($provider->id === $request->provider_id) {
+            try {
+                Service::query()
+                    ->firstWhere('id', $request->service_id)
+                    ->deleteOrFail();
+
+                return redirect()->route('dashboard.provider.services')
+                    ->with('success', 'Votre service a bien été supprimé.');
+            } catch (\Throwable $e) {
+                abort($e->getCode(), $e->getMessage());
+            }
+        }
+
+        return redirect()->route('dashboard.provider.services')
+            ->with('errors', [
+                'message' => 'Vous ne pouvez pas supprimer un service qui ne vous appartient pas.'
+            ]);
     }
 }
