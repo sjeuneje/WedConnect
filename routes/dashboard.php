@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('services')->group(function () {
                 Route::get('', [ServicesProviderController::class, 'index'])->name('dashboard.provider.services');
                 Route::post('', [ServicesProviderController::class, 'store'])->name('dashboard.provider.services.store');
+                Route::put('{service}', [ServicesProviderController::class, 'update'])->name('dashboard.provider.services.update');
                 Route::delete('', [ServicesProviderController::class, 'delete'])->name('dashboard.provider.services.delete');
             });
         });

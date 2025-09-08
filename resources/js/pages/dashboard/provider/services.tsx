@@ -5,6 +5,7 @@ import NewServiceForm from "@/components/dashboard/services/new-service-form";
 import React, {useState} from "react";
 import ShowService from "@/components/dashboard/services/show-service";
 import Modal from "@/components/ui/modal";
+import EditServiceFormContent from "@/components/dashboard/services/edit-service-form.jsx";
 
 type DeleteServicePayload = {
     provider_id: number,
@@ -15,10 +16,11 @@ export default function ServicesProvider({ services, user, currentRoute, billing
     const [showNewServiceForm, setShowNewServiceForm] = useState<boolean>(false);
     const [showDeleteServiceModal, setShowDeleteServiceModal] = useState<boolean>(false);
     const [selectedService, setSelectedService] = useState(-1);
+    const [editServiceForm, setEditServiceForm] = useState(null);
 
-    console.log(errors)
+    // console.log(errors)
 
-    const deleteService = (service) => {
+    const deleteService = () => {
         const payload: DeleteServicePayload = {
             provider_id: user.provider.id,
             service_id: selectedService,
@@ -31,16 +33,43 @@ export default function ServicesProvider({ services, user, currentRoute, billing
         setShowDeleteServiceModal(false);
     }
 
+    const handleUpdateService = (editServiceForm) => {
+        router.put(
+            route('dashboard.provider.services.update', editServiceForm.id),
+            editServiceForm,
+            {
+                onSuccess: () => {
+                    setEditServiceForm(null);
+                }
+            }
+        );
+    }
+
     return (
         <>
             <Head title="Services" />
             <DashboardLayout currentRoute={currentRoute}>
                 {/*<SuccessBanner key={user.updated_at} message={flash?.success} />*/}
                 <Modal
+                    isOpen={!!editServiceForm}
+                    title="Modifier le service"
+                    onCancel={() => setEditServiceForm(null)}
+                    onConfirm={() => handleUpdateService(editServiceForm)}
+                >
+                    {editServiceForm && (
+                        <EditServiceFormContent
+                            service={editServiceForm}
+                            setService={setEditServiceForm}
+                            billingUnits={billingUnits}
+                            errors={errors}
+                        />
+                    )}
+                </Modal>
+                <Modal
                     isOpen={showDeleteServiceModal}
                     title="Supprimer le service ?"
                     onCancel={() => setShowDeleteServiceModal(false)}
-                    onConfirm={() => deleteService(selectedService)}
+                    onConfirm={() => deleteService()}
                 >
                     <p>Cette action est irréversible. Voulez-vous continuer ?</p>
                 </Modal>
@@ -64,6 +93,7 @@ export default function ServicesProvider({ services, user, currentRoute, billing
                             billingUnits={billingUnits}
                             setShowDeleteServiceModal={setShowDeleteServiceModal}
                             setSelectedService={setSelectedService}
+                            setEditServiceForm={setEditServiceForm}
                         />
                     ))}
                 </div>

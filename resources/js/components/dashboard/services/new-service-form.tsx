@@ -23,6 +23,7 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits, er
 
     const createService = () => {
         form.post(route("dashboard.provider.services.store"));
+        setShowNewServiceForm(false);
     };
 
     return (
@@ -71,6 +72,7 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits, er
                         options={form.data.options}
                         setOptions={(options: ServiceOption[]) => form.setData("options", options)}
                         billingUnits={billingUnits}
+                        errors={errors}
                     />
                 </div>
             </div>

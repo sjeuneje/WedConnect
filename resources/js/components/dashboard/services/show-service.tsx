@@ -4,7 +4,8 @@ export default function ShowService({
     service,
     billingUnits,
     setShowDeleteServiceModal,
-    setSelectedService
+    setSelectedService,
+    setEditServiceForm
 }) {
     const getBillingUnit = (billingUnit) => {
         return billingUnits.find(u => u.value === billingUnit);
@@ -17,7 +18,7 @@ export default function ShowService({
 
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6">
-            <div className="flex w-full justify-between align-top">
+            <div className="flex flex-col-reverse md:flex-row w-full justify-between align-top">
                 <div>
                     <h3 className="text-[13px] font-semibold text-gray-900 mb-2">
                         {service.name}
@@ -32,9 +33,9 @@ export default function ShowService({
                         <button
                             type="button"
                             className="w-fit h-fit text-slate-800 text-[12px] cursor-pointer hover:underline"
-                            onClick={() => console.log(service)}
+                            onClick={() => setEditServiceForm(service)}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[20px] font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-[16px] md:size-[20px] font-medium">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                             </svg>
                         </button>
@@ -56,7 +57,7 @@ export default function ShowService({
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="size-[20px]"
+                                className="size-[16px] md:size-[20px]"
                             >
                                 <path
                                     strokeLinecap="round"

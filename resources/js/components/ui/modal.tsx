@@ -20,7 +20,7 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                 onClick={onCancel}
             ></div>
 
-            <div className="relative bg-white rounded-xl shadow-lg max-w-lg w-full z-10 p-6">
+            <div className="relative bg-white rounded-xl shadow-lg max-w-lg w-full z-10 p-6 max-h-[90vh] flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                     <h2 className="text-[14px] font-semibold text-gray-900">{title}</h2>
                     <button
@@ -45,9 +45,12 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                     </button>
                 </div>
 
-                <div className="text-[13px] mb-6">{children}</div>
+                {/* contenu scrollable */}
+                <div className="text-[13px] mb-6 overflow-y-auto pr-2 flex-1">
+                    {children}
+                </div>
 
-                <div className="flex justify-end gap-3">
+                <div className="flex justify-end gap-3 mt-2">
                     <SecondaryButton onClick={onCancel}>
                         Annuler
                     </SecondaryButton>
@@ -59,3 +62,4 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
         </div>
     )
 }
+

@@ -7,7 +7,7 @@ type Props = {
     billingUnits: { label: string; value: string }[];
 };
 
-export default function NewServiceOptionsForm({ options, setOptions, billingUnits }: Props) {
+export default function NewServiceOptionsForm({ options, setOptions, billingUnits, errors }: Props) {
     const addOption = () => {
         const incompleteOption = options.some(o => !o.name.trim() || !o.description?.trim());
         if (incompleteOption) return;
@@ -55,6 +55,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
                                     type="text"
                                     placeholder="Ex: Album photo, Retouche avancée"
                                     value={option.name}
+                                    error={errors[`options.${index}.name`]}
                                     onChange={(e) => updateOption(index, "name", e.target.value)}
                                     required
                                 />
@@ -66,6 +67,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
                                     placeholder="Ex: Ajout de 20 photos retouchées supplémentaires..."
                                     className="h-[80px]"
                                     value={option.description}
+                                    error={errors[`options.${index}.description`]}
                                     onChange={(e) => updateOption(index, "description", e.target.value)}
                                     required
                                 />
@@ -79,6 +81,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
                                         label="Prix (€)"
                                         type="number"
                                         value={option.rate.amount}
+                                        error={errors[`options.${index}.rate.amount`]}
                                         onChange={(e) => updateRate(index, "amount", e.target.value)}
                                         required
                                     />
@@ -87,6 +90,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
                                     <Input.Select
                                         label="Unité de facturation"
                                         value={option.rate.billing_unit}
+                                        error={errors[`options.${index}.rate.billing_unit`]}
                                         onChange={(e) => updateRate(index, "billing_unit", e.target.value)}
                                         required
                                     >
@@ -103,6 +107,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
                                             label="Label personnalisé"
                                             type="text"
                                             value={option.rate.custom_label}
+                                            error={errors[`options.${index}.rate.custom_label`]}
                                             onChange={(e) => updateRate(index, "custom_label", e.target.value)}
                                         />
                                     </div>
