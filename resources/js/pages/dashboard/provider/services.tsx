@@ -11,20 +11,24 @@ type DeleteServicePayload = {
     service_id: number
 }
 
-export default function ServicesProvider({ services, user, currentRoute, billingUnits }) {
+export default function ServicesProvider({ services, user, currentRoute, billingUnits, errors }) {
     const [showNewServiceForm, setShowNewServiceForm] = useState<boolean>(false);
     const [showDeleteServiceModal, setShowDeleteServiceModal] = useState<boolean>(false);
-    const [selectedService, setSelectedService] = useState({});
+    const [selectedService, setSelectedService] = useState(-1);
+
+    console.log(errors)
 
     const deleteService = (service) => {
         const payload: DeleteServicePayload = {
             provider_id: user.provider.id,
-            service_id: service.id,
+            service_id: selectedService,
         }
 
         router.delete(route('dashboard.provider.services.delete'), {
             data: payload
         });
+
+        setShowDeleteServiceModal(false);
     }
 
     return (
@@ -45,7 +49,13 @@ export default function ServicesProvider({ services, user, currentRoute, billing
                 <PrimaryButton onClick={() => setShowNewServiceForm(true)}>
                     Ajouter un service
                 </PrimaryButton>
-                {showNewServiceForm && <NewServiceForm setShowNewServiceForm={setShowNewServiceForm} billingUnits={billingUnits} />}
+                {showNewServiceForm &&
+                    <NewServiceForm
+                        setShowNewServiceForm={setShowNewServiceForm}
+                        billingUnits={billingUnits}
+                        errors={errors}
+                    />
+                }
                 <div className="mt-4">
                     {services.map((service) => (
                         <ShowService

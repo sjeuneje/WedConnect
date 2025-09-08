@@ -45,7 +45,7 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                     </button>
                 </div>
 
-                <div className="mb-6">{children}</div>
+                <div className="text-[13px] mb-6">{children}</div>
 
                 <div className="flex justify-end gap-3">
                     <SecondaryButton onClick={onCancel}>

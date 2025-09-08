@@ -15,7 +15,7 @@ type Props = {
     billingUnits: BillingUnitOption[];
 };
 
-export default function NewServiceRatesForm({ rates, setRates, billingUnits }: Props) {
+export default function NewServiceRatesForm({ rates, setRates, billingUnits, errors }: Props) {
     const addRate = () => {
         const lastRate = rates[rates.length - 1];
         if (
@@ -56,6 +56,7 @@ export default function NewServiceRatesForm({ rates, setRates, billingUnits }: P
                                 type="number"
                                 placeholder="50"
                                 value={rate.amount}
+                                error={errors[`rates.${index}.amount`]}
                                 onChange={(e) => updateRate(index, "amount", e.target.value)}
                                 required
                             />
@@ -65,6 +66,7 @@ export default function NewServiceRatesForm({ rates, setRates, billingUnits }: P
                             <Input.Select
                                 label="Unité de facturation"
                                 value={rate.billing_unit}
+                                error={errors[`rates.${index}.billing_unit`]}
                                 onChange={(e) => updateRate(index, "billing_unit", e.target.value as BillingUnit)}
                                 required
                             >
@@ -83,6 +85,7 @@ export default function NewServiceRatesForm({ rates, setRates, billingUnits }: P
                                     type="text"
                                     placeholder="ex: Par couple, Par prestation"
                                     value={rate.custom_label}
+                                    error={errors[`rates.${index}.custom_label`]}
                                     onChange={(e) => updateRate(index, "custom_label", e.target.value)}
                                     required
                                 />

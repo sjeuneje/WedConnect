@@ -11,7 +11,7 @@ type Props = {
     billingUnits: { label: string; value: string }[];
 };
 
-export default function NewServiceForm({ setShowNewServiceForm, billingUnits }: Props) {
+export default function NewServiceForm({ setShowNewServiceForm, billingUnits, errors }: Props) {
     const form = useForm<ServiceFormData>({
         name: "",
         description: "",
@@ -38,6 +38,7 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits }: 
                                 type="text"
                                 placeholder="Photographe mariage"
                                 value={form.data.name}
+                                error={errors?.name}
                                 onChange={(e) => form.setData("name", e.target.value)}
                                 required
                             />
@@ -52,6 +53,7 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits }: 
                                 className="h-[100px]"
                                 placeholder="Capturez vos moments magiques..."
                                 value={form.data.description}
+                                error={errors?.description}
                                 onChange={(e) => form.setData("description", e.target.value)}
                                 required
                             />
@@ -62,6 +64,7 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits }: 
                         billingUnits={billingUnits}
                         rates={form.data.rates}
                         setRates={(rates: ServiceRate[]) => form.setData("rates", rates)}
+                        errors={errors}
                     />
 
                     <NewServiceOptionsForm
