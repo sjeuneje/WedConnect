@@ -3,7 +3,6 @@ import Sidebar from "@/components/dashboard/sidebar";
 import {dashboardPages} from "@/data/provider/dashboardPages";
 import {Page} from "@/types";
 import {useEffect, useState} from "react";
-import SuccessBanner from "@/components/ui/success-banner";
 
 export default function DashboardLayout({ currentRoute, children }) {
     const pages = dashboardPages;

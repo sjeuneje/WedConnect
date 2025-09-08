@@ -22,7 +22,6 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits }: 
     });
 
     const createService = () => {
-        console.log(form.data);
         form.post(route("dashboard.provider.services.store"));
     };
 

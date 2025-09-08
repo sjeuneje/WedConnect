@@ -4,6 +4,7 @@ import PrimaryButton from "@/components/ui/buttons/primary";
 import NewServiceForm from "@/components/dashboard/services/new-service-form";
 import React, {useState} from "react";
 import ShowService from "@/components/dashboard/services/show-service";
+import Modal from "@/components/ui/modal";
 
 type DeleteServicePayload = {
     provider_id: number,
@@ -12,6 +13,8 @@ type DeleteServicePayload = {
 
 export default function ServicesProvider({ services, user, currentRoute, billingUnits }) {
     const [showNewServiceForm, setShowNewServiceForm] = useState<boolean>(false);
+    const [showDeleteServiceModal, setShowDeleteServiceModal] = useState<boolean>(false);
+    const [selectedService, setSelectedService] = useState({});
 
     const deleteService = (service) => {
         const payload: DeleteServicePayload = {
@@ -29,6 +32,14 @@ export default function ServicesProvider({ services, user, currentRoute, billing
             <Head title="Services" />
             <DashboardLayout currentRoute={currentRoute}>
                 {/*<SuccessBanner key={user.updated_at} message={flash?.success} />*/}
+                <Modal
+                    isOpen={showDeleteServiceModal}
+                    title="Supprimer le service ?"
+                    onCancel={() => setShowDeleteServiceModal(false)}
+                    onConfirm={() => deleteService(selectedService)}
+                >
+                    <p>Cette action est irréversible. Voulez-vous continuer ?</p>
+                </Modal>
                 <h1 className="text-[14px] font-semibold mb-2">Gérez vos services et tarifs proposés aux mariés</h1>
                 <p className="text-[12px] text-gray-500 max-w-[500px] mb-4">Ajoutez, modifiez ou supprimez vos services, définissez vos tarifs principaux et options, et téléchargez des photos pour mieux présenter votre activité.</p>
                 <PrimaryButton onClick={() => setShowNewServiceForm(true)}>
@@ -41,7 +52,8 @@ export default function ServicesProvider({ services, user, currentRoute, billing
                             key={service.id}
                             service={service}
                             billingUnits={billingUnits}
-                            deleteService={deleteService}
+                            setShowDeleteServiceModal={setShowDeleteServiceModal}
+                            setSelectedService={setSelectedService}
                         />
                     ))}
                 </div>

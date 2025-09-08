@@ -3,15 +3,20 @@ import React from "react";
 export default function ShowService({
     service,
     billingUnits,
-    deleteService
+    setShowDeleteServiceModal,
+    setSelectedService
 }) {
     const getBillingUnit = (billingUnit) => {
         return billingUnits.find(u => u.value === billingUnit);
     }
 
+    const handleDelete = (id) => {
+        setSelectedService(id);
+        setShowDeleteServiceModal(true);
+    }
+
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6">
-            {/* Titre + description */}
             <div className="flex w-full justify-between align-top">
                 <div>
                     <h3 className="text-[13px] font-semibold text-gray-900 mb-2">
@@ -43,7 +48,7 @@ export default function ShowService({
                         <button
                             type="button"
                             className="w-fit h-fit text-red-500 text-[12px] cursor-pointer hover:underline"
-                            onClick={() => deleteService(service)}
+                            onClick={() => handleDelete(service.id)}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +73,6 @@ export default function ShowService({
                 </div>
             </div>
 
-            {/* Tarifs */}
             {service.rates?.length > 0 && (
                 <div className="mb-4">
                     <h4 className="text-[13px] font-medium text-gray-800 mb-2">Tarifs</h4>
@@ -82,15 +86,14 @@ export default function ShowService({
                                     key={idx}
                                     className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700"
                                 >
-                                                    {rate.amount}€ – {label}
-                                                </span>
+                                    {rate.amount}€ – {label}
+                                </span>
                             )
                         })}
                     </div>
                 </div>
             )}
 
-            {/* Options */}
             {service.options?.length > 0 && (
                 <div className="mt-4">
                     <details className="group">
