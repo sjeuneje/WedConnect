@@ -39,7 +39,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
     };
 
     return (
-        <div className="flex flex-col border-t-gray-100 w-full">
+        <div className="flex flex-col border-t pt-4 border-t-gray-100 w-full">
             <h3 className={`text-[13.5px] font-semibold ${options.length > 0 ? 'mb-4' : ''}`}>Options</h3>
 
             <div className="flex flex-col gap-y-4">
@@ -129,7 +129,7 @@ export default function NewServiceOptionsForm({ options, setOptions, billingUnit
             </div>
 
             <p
-                className="text-[12px] mt-2 mb-6 text-slate-700 font-medium cursor-pointer hover:underline w-fit"
+                className="text-[12px] mt-2 text-slate-700 font-medium cursor-pointer hover:underline w-fit"
                 onClick={addOption}
             >
                 + Ajouter une option

@@ -74,6 +74,33 @@ export default function ShowService({
                 </div>
             </div>
 
+            {service.photos?.length > 0 && (
+                <div className="mb-4">
+                    <h4 className="text-[13px] font-medium text-gray-800 mb-2">Photos</h4>
+                    <div className="
+                      grid gap-3
+                      [grid-template-columns:repeat(1,200px)]
+                      sm:[grid-template-columns:repeat(2,200px)]
+                      md:[grid-template-columns:repeat(3,200px)]
+                      lg:[grid-template-columns:repeat(4,200px)]
+                      justify-left
+                    ">
+                        {service.photos.map((photo, idx) => (
+                            <div
+                                key={idx}
+                                className="relative w-full aspect-square rounded-md overflow-hidden border bg-gray-50"
+                            >
+                                <img
+                                    src={`/storage/${photo.path}`}
+                                    alt={`Photo ${idx + 1}`}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
             {service.rates?.length > 0 && (
                 <div className="mb-4">
                     <h4 className="text-[13px] font-medium text-gray-800 mb-2">Tarifs</h4>

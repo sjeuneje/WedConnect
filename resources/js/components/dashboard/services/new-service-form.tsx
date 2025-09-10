@@ -2,9 +2,10 @@ import { useForm } from "@inertiajs/react";
 import Input from "@/components/ui/input";
 import PrimaryButton from "@/components/ui/buttons/primary";
 import SecondaryButton from "@/components/ui/buttons/secondary";
-import NewServiceRatesForm from "@/components/dashboard/services/new-service-rates-form";
-import NewServiceOptionsForm from "@/components/dashboard/services/new-service-options-form";
+import NewServiceRatesForm from "@/components/dashboard/services/new/new-service-rates-form";
+import NewServiceOptionsForm from "@/components/dashboard/services/new/new-service-options-form";
 import { ServiceFormData, ServiceRate, ServiceOption } from "@/types/service";
+import NewServicePhotosForm from "@/components/dashboard/services/new/new-service-photos-form";
 
 type Props = {
     setShowNewServiceForm: (show: boolean) => void;
@@ -19,11 +20,19 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits, er
             { amount: "", billing_unit: billingUnits[0]?.value || "hour", custom_label: "" },
         ],
         options: [],
+        photos: [],
     });
 
     const createService = () => {
-        form.post(route("dashboard.provider.services.store"));
-        setShowNewServiceForm(false);
+        const savePhotos = form.data.photos;
+
+        form.data.photos = form.data.photos?.map(p => p.file) ?? [];
+
+        form.post(route("dashboard.provider.services.store"), {
+            forceFormData: true,
+            onSuccess: () => setShowNewServiceForm(false),
+            onError: () => form.data.photos = savePhotos,
+        });
     };
 
     return (
@@ -60,6 +69,12 @@ export default function NewServiceForm({ setShowNewServiceForm, billingUnits, er
                             />
                         </div>
                     </div>
+
+                    <NewServicePhotosForm
+                        photos={form.data.photos}
+                        setPhotos={(photos) => form.setData("photos", photos)}
+                        errors={errors}
+                    />
 
                     <NewServiceRatesForm
                         billingUnits={billingUnits}

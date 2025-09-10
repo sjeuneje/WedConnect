@@ -40,6 +40,9 @@ class StoreServiceProviderRequest extends FormRequest
             'options.*.rate.amount' => ['required_with:options.*', 'numeric', 'min:0', 'max:1000000'],
             'options.*.rate.billing_unit' => ['required_with:options.*', 'in:' . implode(',', $billingValues)],
             'options.*.rate.custom_label' => ['required_if:options.*.rate.billing_unit,custom', 'max:255'],
+
+            'photos' => ['nullable', 'array', 'max:10'],
+            'photos.*' => ['file', 'max:2048'],
         ];
     }
 
@@ -80,6 +83,13 @@ class StoreServiceProviderRequest extends FormRequest
             'options.*.rate.billing_unit.in' => 'L’unité de facturation de l’option sélectionnée est invalide.',
             'options.*.rate.custom_label.required_if' => 'Le label personnalisé de l’option est obligatoire pour une unité personnalisée.',
             'options.*.rate.custom_label.max' => 'Le label personnalisé de l’option ne peut pas dépasser 255 caractères.',
+
+            'photos.array' => 'Les photos doivent être fournies sous forme de tableau.',
+            'photos.max' => 'Vous ne pouvez pas ajouter plus de 5 photos.',
+            'photos.*.file' => 'Chaque élément doit être un fichier valide.',
+            'photos.*.image' => 'Chaque fichier doit être une image.',
+            'photos.*.mimes' => 'Chaque image doit être au format : jpeg, jpg, png ou gif.',
+            'photos.*.max' => 'Chaque image ne peut pas dépasser 2 Mo.',
         ];
     }
 }

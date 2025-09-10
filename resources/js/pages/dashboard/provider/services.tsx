@@ -1,4 +1,4 @@
-import {Head, router} from "@inertiajs/react";
+import {Head, router, useForm} from "@inertiajs/react";
 import DashboardLayout from "@/layouts/dashboard";
 import PrimaryButton from "@/components/ui/buttons/primary";
 import NewServiceForm from "@/components/dashboard/services/new-service-form";
@@ -6,19 +6,25 @@ import React, {useState} from "react";
 import ShowService from "@/components/dashboard/services/show-service";
 import Modal from "@/components/ui/modal";
 import EditServiceFormContent from "@/components/dashboard/services/edit-service-form.jsx";
+import {SuccessBanner} from "@/components/ui/success-banner";
 
 type DeleteServicePayload = {
     provider_id: number,
     service_id: number
 }
 
-export default function ServicesProvider({ services, user, currentRoute, billingUnits, errors }) {
+export default function ServicesProvider({
+    services,
+    user,
+    currentRoute,
+    billingUnits,
+    errors,
+    flash
+}) {
     const [showNewServiceForm, setShowNewServiceForm] = useState<boolean>(false);
     const [showDeleteServiceModal, setShowDeleteServiceModal] = useState<boolean>(false);
     const [selectedService, setSelectedService] = useState(-1);
     const [editServiceForm, setEditServiceForm] = useState(null);
-
-    // console.log(errors)
 
     const deleteService = () => {
         const payload: DeleteServicePayload = {
@@ -34,22 +40,23 @@ export default function ServicesProvider({ services, user, currentRoute, billing
     }
 
     const handleUpdateService = (editServiceForm) => {
-        router.put(
-            route('dashboard.provider.services.update', editServiceForm.id),
+        router.post(
+            route("dashboard.provider.services.update", editServiceForm.id),
             editServiceForm,
             {
-                onSuccess: () => {
-                    setEditServiceForm(null);
-                }
+                forceFormData: true,
+                onSuccess: () => setEditServiceForm(null),
             }
         );
-    }
+    };
 
     return (
         <>
             <Head title="Services" />
             <DashboardLayout currentRoute={currentRoute}>
-                {/*<SuccessBanner key={user.updated_at} message={flash?.success} />*/}
+                {flash?.success && (
+                    <SuccessBanner key={flash.success} message={flash.success} />
+                )}
                 <Modal
                     isOpen={!!editServiceForm}
                     title="Modifier le service"

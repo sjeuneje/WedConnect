@@ -20,7 +20,7 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                 onClick={onCancel}
             ></div>
 
-            <div className="relative bg-white rounded-xl shadow-lg max-w-lg w-full z-10 p-6 max-h-[90vh] flex flex-col">
+            <div className="relative bg-white rounded-xl shadow-lg max-w-[812px] w-full z-10 p-6 max-h-[90vh] flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                     <h2 className="text-[14px] font-semibold text-gray-900">{title}</h2>
                     <button

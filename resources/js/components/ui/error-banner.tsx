@@ -29,4 +29,4 @@ function ErrorBanner({ message, duration = 5000 }: Props) {
     );
 }
 
-export { SuccessBanner };
+export { ErrorBanner };

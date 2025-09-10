@@ -37,4 +37,5 @@ export type ServiceFormData = {
     description?: string;
     rates: ServiceRate[];
     options: ServiceOption[];
+    photos?: File[];
 };

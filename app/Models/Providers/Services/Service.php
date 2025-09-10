@@ -35,11 +35,17 @@ class Service extends Model
         return $this->hasMany(ServiceOption::class);
     }
 
+    public function photos(): HasMany
+    {
+        return $this->hasMany(ServicePhoto::class)->orderBy('position');
+    }
+
     public static function getProviderServices(int $providerId): Collection
     {
         return self::query()
             ->where('provider_id', $providerId)
             ->with([
+                'photos',
                 'rates',
                 'options.rate'
             ])

@@ -9,11 +9,15 @@ use App\Http\Requests\Services\UpdateServiceProviderRequest;
 use App\Models\Providers\Services\OptionRate;
 use App\Models\Providers\Services\Service;
 use App\Models\Providers\Services\ServiceOption;
+use App\Models\Providers\Services\ServicePhoto;
 use App\Models\Providers\Services\ServiceRate;
 use App\Models\User;
+use App\Services\ValidateUpdateServicePhotos;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class ServicesProviderController extends Controller
 {
@@ -52,23 +56,42 @@ class ServicesProviderController extends Controller
                 ]);
         }
 
-        foreach ($data['options'] as $option) {
-            $serviceOption = ServiceOption::query()
-                ->create([
-                    'service_id' => $service->id,
-                    'name' => $option['name'],
-                    'description' => $option['description']
-                ]);
-
-            $rate = $option['rate'];
-            if (!empty($rate)) {
-                OptionRate::query()
+        if (!empty($data['options'])) {
+            foreach ($data['options'] as $option) {
+                $serviceOption = ServiceOption::query()
                     ->create([
-                        'option_id' => $serviceOption->id,
-                        'amount' => $rate['amount'],
-                        'billing_unit' => $rate['billing_unit'],
-                        'custom_label' => $rate['custom_label']
+                        'service_id' => $service->id,
+                        'name' => $option['name'],
+                        'description' => $option['description']
                     ]);
+
+                $rate = $option['rate'];
+                if (!empty($rate)) {
+                    OptionRate::query()
+                        ->create([
+                            'option_id' => $serviceOption->id,
+                            'amount' => $rate['amount'],
+                            'billing_unit' => $rate['billing_unit'],
+                            'custom_label' => $rate['custom_label']
+                        ]);
+                }
+            }
+        }
+
+        if (!empty($data['photos'])) {
+            foreach ($data['photos'] as $index => $photoFile) {
+                try {
+                    $path = $photoFile->store('service_photos', 'public');
+                    if ($path) {
+                        ServicePhoto::query()->create([
+                            'service_id' => $service->id,
+                            'path' => $path,
+                            'order' => $index + 1,
+                        ]);
+                    }
+                } catch (\Throwable $e) {
+                    Log::error("Échec du stockage de la photo #$index pour le service {$service->id}: ".$e->getMessage());
+                }
             }
         }
 
@@ -85,6 +108,44 @@ class ServicesProviderController extends Controller
         }
 
         $data = $request->validated();
+
+        $errors = ValidateUpdateServicePhotos::check($service, $request);
+
+        if (!empty($errors)) {
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+
+        $data['photos'] = $request->photos;
+        $existingPhotoIds = collect($data['photos'] ?? [])
+            ->filter(fn($p) => isset($p['id']))
+            ->pluck('id')
+            ->toArray();
+
+        $service->photos()
+            ->whereNotIn('id', $existingPhotoIds)
+            ->get()
+            ->each(function ($photo) {
+                Storage::disk('public')->delete($photo->path);
+                $photo->delete();
+            });
+
+        foreach ($data['photos'] ?? [] as $index => $photo) {
+            $position = isset($photo['position']) ? max(0, (int)$photo['position']) : $index;
+
+            if (isset($photo['file'])) {
+                $uploadedFile = $request->file("photos.$index.file");
+
+                $path = $uploadedFile->store('service_photos', 'public');
+
+                $service->photos()->create([
+                    'path' => $path,
+                    'position' => $position,
+                ]);
+            } elseif (isset($photo['id'])) {
+                $servicePhoto = $service->photos()->find($photo['id']);
+                $servicePhoto?->update(['position' => $position]);
+            }
+        }
 
         $service->update([
             'name' => $data['name'],

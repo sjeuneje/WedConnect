@@ -41,7 +41,7 @@ export default function NewServiceRatesForm({ rates, setRates, billingUnits, err
     };
 
     return (
-        <div className="flex flex-col border-t-gray-100 w-full">
+        <div className="flex flex-col border-t pt-4 border-t-gray-100 w-full">
             <h3 className="text-[13.5px] font-semibold mb-4">Tarification</h3>
 
             <div className="flex flex-col gap-y-4">

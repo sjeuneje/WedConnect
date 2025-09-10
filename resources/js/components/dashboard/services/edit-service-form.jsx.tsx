@@ -1,7 +1,9 @@
 import Input from "@/components/ui/input";
-import NewServiceRatesForm from "@/components/dashboard/services/new-service-rates-form";
-import NewServiceOptionsForm from "@/components/dashboard/services/new-service-options-form";
+import NewServiceRatesForm from "@/components/dashboard/services/new/new-service-rates-form";
+import NewServiceOptionsForm from "@/components/dashboard/services/new/new-service-options-form";
 import {ServiceFormData, ServiceRate, ServiceOption, BillingUnit} from "@/types/service";
+import NewServicePhotosForm from "@/components/dashboard/services/new/new-service-photos-form";
+import EditServicePhotosForm from "@/components/dashboard/services/edit/edit-service-photos-form";
 
 type Props = {
     service: ServiceFormData;
@@ -35,6 +37,12 @@ export default function EditServiceFormContent({ service, billingUnits, errors, 
                 value={service.description || ""}
                 error={errors?.description}
                 onChange={(e) => updateField("description", e.target.value)}
+            />
+
+            <EditServicePhotosForm
+                photos={service.photos || []}
+                setPhotos={(newPhotos) => setService({ ...service, photos: newPhotos })}
+                errors={errors}
             />
 
             <NewServiceRatesForm
