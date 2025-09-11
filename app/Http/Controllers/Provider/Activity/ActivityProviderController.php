@@ -16,6 +16,7 @@ class ActivityProviderController extends Controller
         return Inertia::render('dashboard/provider/activity', [
             'user' => User::with(['provider.services.photos', 'provider.services.rates', 'provider.services.options.rate',])->find(Auth::id()),
             'currentRoute' => request()->route()->getName(),
+            'billingUnits' => config('billing_units')
         ]);
     }
 }
