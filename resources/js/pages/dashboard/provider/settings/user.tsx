@@ -7,6 +7,7 @@ type FormData = {
     password?: string;
     new_password: string;
     new_password_confirmation?: string;
+    contact_email: string;
 };
 
 export default function SettingsUserTabProvider({ user, errors }) {
@@ -14,7 +15,8 @@ export default function SettingsUserTabProvider({ user, errors }) {
         phone_number: user.phone_number,
         password: '',
         new_password: '',
-        new_password_confirmation: ''
+        new_password_confirmation: '',
+        contact_email: user.contact_email
     });
 
     const updateUser = () => {
@@ -23,6 +25,22 @@ export default function SettingsUserTabProvider({ user, errors }) {
 
     return (
         <>
+            <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
+                <div className="w-full md:w-[400px]">
+                    <h2 className="text-[13px] font-semibold mb-2">Email de contact</h2>
+                    <p className="text-xs text-gray-500 max-w-[500px] mb-4">Modifiez votre email de contact, cette action ne modifiera pas l'adresse de connexion que vous avez utilisé. Cette adresse sera utilisée pour vous contacter.</p>
+                    <Input
+                        id="contact_email"
+                        type="email"
+                        placeholder={user?.contact_email ? '' : 'johndoe@gmail.com'}
+                        value={form.data.contact_email}
+                        onChange={(e) => form.setData('contact_email' as keyof FormData, e.target.value)}
+                        error={errors?.contact_email ? errors.contact_email : ''}
+                        required
+                    />
+                </div>
+            </div>
+
             <div className="flex flex-col mt-4 pt-4 border-t border-t-gray-100 w-full gap-y-8">
                 <div className="w-full md:w-[400px]">
                     <h2 className="text-[13px] font-semibold mb-2">Numéro de téléphone</h2>

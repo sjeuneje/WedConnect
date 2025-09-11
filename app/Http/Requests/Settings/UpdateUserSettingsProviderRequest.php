@@ -36,6 +36,10 @@ class UpdateUserSettingsProviderRequest extends FormRequest
                 'confirmed',
                 Rules\Password::defaults(),
             ],
+            'contact_email' => [
+                'nullable',
+                'email'
+            ]
         ];
     }
 }

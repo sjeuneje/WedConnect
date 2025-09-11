@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Couple\Dashboard\DashboardCoupleController;
+use App\Http\Controllers\Provider\Activity\ActivityProviderController;
 use App\Http\Controllers\Provider\Dashboard\DashboardProviderController;
 use App\Http\Controllers\Provider\Services\ServicesProviderController;
 use App\Http\Controllers\Provider\Settings\SettingsProviderController;
@@ -22,6 +23,10 @@ Route::middleware('auth')->group(function () {
                 Route::post('', [ServicesProviderController::class, 'store'])->name('dashboard.provider.services.store');
                 Route::post('{service}', [ServicesProviderController::class, 'update'])->name('dashboard.provider.services.update');
                 Route::delete('', [ServicesProviderController::class, 'delete'])->name('dashboard.provider.services.delete');
+            });
+
+            Route::prefix('activity')->group(function () {
+                Route::get('', [ActivityProviderController::class, 'show'])->name('dashboard.provider.activity');
             });
         });
 

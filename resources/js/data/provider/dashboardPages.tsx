@@ -11,7 +11,7 @@ export const dashboardPages: Page[] = [
     },
     {
         name: 'Mon activité',
-        href: 'dashboard.provider',
+        href: 'dashboard.provider.activity',
         icon: <Activity />,
         showOnDesktop: true,
         method: 'get'

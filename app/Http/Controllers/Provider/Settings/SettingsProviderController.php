@@ -8,7 +8,10 @@ use App\Http\Requests\Settings\UpdateUserSettingsProviderRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Throwable;
 
 class SettingsProviderController extends Controller
 {
@@ -49,12 +52,20 @@ class SettingsProviderController extends Controller
     public function updateActivity(UpdateActivitySettingsProviderRequest $request)
     {
         $provider = auth()->user()->provider;
-
         $data = $request->validated();
 
+        $oldLogoPath = $provider?->logo;
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->store('provider_logos', 'public');
-            $data['logo'] = $path;
+            try {
+                $path = $request->file('logo')->store('provider_logos', 'public');
+                $data['logo'] = $path;
+
+                if ($oldLogoPath) {
+                    Storage::disk('public')->delete($oldLogoPath);
+                }
+            } catch (Throwable $e) {
+                Log::error($e->getMessage());
+            }
         } else {
             unset($data['logo']);
         }

@@ -18,7 +18,7 @@ class UpdateActivitySettingsProviderRequest extends FormRequest
             'logo'            => ['nullable', 'file', 'max:2048'],
             'city'            => ['nullable', 'string', 'max:255'],
             'zipcode'         => ['nullable', 'string', 'max:20'],
-            'description'     => ['nullable', 'string', 'max:1000'],
+            'description'     => ['nullable', 'string', 'max:5000'],
             'facebook_url'    => ['nullable', 'url', 'max:255'],
             'instagram_url'   => ['nullable', 'url', 'max:255'],
             'website_url'     => ['nullable', 'url', 'max:255'],
