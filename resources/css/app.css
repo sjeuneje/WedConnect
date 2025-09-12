@@ -139,3 +139,17 @@
         @apply bg-background text-foreground;
     }
 }
+
+.button-pulse-slow {
+    animation: pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    transition: transform 0.3s;
+}
+
+.button-pulse-slow:hover {
+    transform: scale(1.05);
+}
+
+@keyframes pulseSlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

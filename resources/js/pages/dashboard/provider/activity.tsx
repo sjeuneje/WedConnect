@@ -19,9 +19,17 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
         provider?.services?.length > 0;
 
     const changePublishActivityState = () => {
-        router.patch(route('dashboard.provider.activity.publish'), {
-            isPublished: user?.provider?.published_at ? false : true
-        });
+        router.patch(
+            route('dashboard.provider.activity.publish'),
+            {
+                isPublished: user?.provider?.published_at ? false : true
+            },
+            {
+                onSuccess: () => {
+                    router.visit(route('dashboard.provider.activity'))
+                }
+            }
+        );
     }
 
     return (
@@ -36,33 +44,11 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
                     Vous pouvez également visualiser les informations que vous avez entrer de manière plus globale.
                 </p>
 
-                <div className="relative group w-fit h-fit">
-                    {user?.provider?.published_at ?
-                        <>
-                            <DangerButton onClick={changePublishActivityState}>
-                                Dépublier mon profil
-                            </DangerButton>
-                            <span className="absolute z-[9999] top-12 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
-                                Lorsque vous dépubliez votre profil, il ne sera plus visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme.
-                            </span>
-                        </>
-                        :
-                        <>
-                            <PrimaryButton
-                                disabled={!isProfileComplete}
-                                onClick={changePublishActivityState}
-                            >
-                                Publier mon profil
-                            </PrimaryButton>
-                            <span className="absolute z-[9999] top-12 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
-                                {isProfileComplete
-                                    ? "Lorsque vous publiez votre profil, il sera visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme."
-                                    : "⚠️ Vous devez compléter toutes les informations (logo, description, contact et au moins un service) avant de pouvoir publier votre profil."
-                                }
-                            </span>
-                        </>
-                    }
-                </div>
+                {!user?.provider?.published_at &&
+                    <div className="mb-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-[12px] text-yellow-700">
+                        ⚠️ Vous n'avez pas encore publier votre profil, <a href="#publish" className="underline">publiez-le dès maintenant.</a>
+                    </div>
+                }
 
                 <div className="flex flex-col py-4 mt-4 border-t border-b border-gray-100 w-full gap-y-8">
                     {(!provider?.logo || !provider?.description) && (
@@ -162,6 +148,35 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
                             />
                         ))}
                     </div>
+                </div>
+
+                <div className="relative group w-fit h-fit" id="publish">
+                    {user?.provider?.published_at ?
+                        <>
+                            <DangerButton onClick={changePublishActivityState}>
+                                Dépublier mon profil
+                            </DangerButton>
+                            <span className="absolute z-[9999] -top-36 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
+                                Lorsque vous dépubliez votre profil, il ne sera plus visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme.
+                            </span>
+                        </>
+                        :
+                        <>
+                            <PrimaryButton
+                                disabled={!isProfileComplete}
+                                onClick={changePublishActivityState}
+                                className={isProfileComplete ? 'button-pulse-slow' : 'opacity-50 cursor-not-allowed'}
+                            >
+                                Publier mon profil
+                            </PrimaryButton>
+                            <span className="absolute z-[9999] -top-36 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
+                                {isProfileComplete
+                                    ? "Lorsque vous publiez votre profil, il sera visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme."
+                                    : "⚠️ Vous devez compléter toutes les informations (logo, description, contact et au moins un service) avant de pouvoir publier votre profil."
+                                }
+                            </span>
+                        </>
+                    }
                 </div>
             </DashboardLayout>
         </>
