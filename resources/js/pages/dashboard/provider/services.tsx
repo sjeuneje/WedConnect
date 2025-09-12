@@ -77,6 +77,7 @@ export default function ServicesProvider({
                     title="Supprimer le service ?"
                     onCancel={() => setShowDeleteServiceModal(false)}
                     onConfirm={() => deleteService()}
+                    isDangerAction
                 >
                     <p>Cette action est irréversible. Voulez-vous continuer ?</p>
                 </Modal>

@@ -1,16 +1,18 @@
 import { ReactNode } from 'react'
 import PrimaryButton from "@/components/ui/buttons/primary";
 import SecondaryButton from "@/components/ui/buttons/secondary";
+import DangerButton from "@/components/ui/buttons/danger";
 
 type ModalProps = {
     isOpen: boolean
     title: string
     children: ReactNode
     onConfirm: () => void
-    onCancel: () => void
+    onCancel: () => void,
+    isDangerAction: boolean
 }
 
-export default function Modal({ isOpen, title, children, onConfirm, onCancel }: ModalProps) {
+export default function Modal({ isOpen, title, children, onConfirm, onCancel, isDangerAction }: ModalProps) {
     if (!isOpen) return null
 
     return (
@@ -45,7 +47,6 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                     </button>
                 </div>
 
-                {/* contenu scrollable */}
                 <div className="text-[13px] mb-6 overflow-y-auto pr-2 flex-1">
                     {children}
                 </div>
@@ -54,9 +55,15 @@ export default function Modal({ isOpen, title, children, onConfirm, onCancel }: 
                     <SecondaryButton onClick={onCancel}>
                         Annuler
                     </SecondaryButton>
-                    <PrimaryButton onClick={onConfirm}>
-                        Confirmer
-                    </PrimaryButton>
+                    {!isDangerAction ?
+                        <PrimaryButton onClick={onConfirm}>
+                            Confirmer
+                        </PrimaryButton>
+                        :
+                        <DangerButton onClick={onConfirm}>
+                            Confirmer
+                        </DangerButton>
+                    }
                 </div>
             </div>
         </div>
