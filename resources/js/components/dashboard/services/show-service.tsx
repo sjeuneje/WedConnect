@@ -43,8 +43,8 @@ export default function ShowService({
                             </button>
 
                             <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                            Modifier
-                        </span>
+                                Modifier
+                            </span>
                         </div>
 
                         <div className="relative group w-fit h-fit">
@@ -70,8 +70,8 @@ export default function ShowService({
                             </button>
 
                             <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-800 px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                            Supprimer
-                        </span>
+                                Supprimer
+                            </span>
                         </div>
                     </div>
                 }

@@ -1,4 +1,5 @@
 import {JSX} from "react";
+import {Service} from "@/types/service";
 
 export type Provider = {
     id: number;
@@ -15,6 +16,7 @@ export type Provider = {
     published_at: string | null;
     created_at: string;
     updated_at: string;
+    services: Service[] | null;
 };
 
 export type User = {

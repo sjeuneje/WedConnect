@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Provider\Activity;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Activity\ActivityProviderPublishActivityRequest;
 use App\Models\Providers\Services\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,5 +19,23 @@ class ActivityProviderController extends Controller
             'currentRoute' => request()->route()->getName(),
             'billingUnits' => config('billing_units')
         ]);
+    }
+
+    public function publishActivity(ActivityProviderPublishActivityRequest $request)
+    {
+        $provider = $request->user()->provider;
+
+        if ($request->boolean('isPublished')) {
+            $provider->published_at = now();
+            $successMessage = 'Votre activité a bien été publiée.';
+        } else {
+            $provider->published_at = null;
+            $successMessage = "Votre activité a bien été dépubliée.";
+        }
+
+        $provider->save();
+        return redirect()
+            ->route('dashboard.provider.activity')
+            ->with('success', $successMessage);
     }
 }

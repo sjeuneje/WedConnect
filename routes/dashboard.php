@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
             Route::prefix('activity')->group(function () {
                 Route::get('', [ActivityProviderController::class, 'show'])->name('dashboard.provider.activity');
+                Route::patch('publish', [ActivityProviderController::class, 'publishActivity'])->name('dashboard.provider.activity.publish');
             });
         });
 
