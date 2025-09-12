@@ -156,7 +156,7 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
                             <DangerButton onClick={changePublishActivityState}>
                                 Dépublier mon profil
                             </DangerButton>
-                            <span className="absolute z-[9999] -top-36 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
+                            <span className="absolute z-[9999] -top-40 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
                                 Lorsque vous dépubliez votre profil, il ne sera plus visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme.
                             </span>
                         </>
@@ -169,7 +169,7 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
                             >
                                 Publier mon profil
                             </PrimaryButton>
-                            <span className="absolute z-[9999] -top-36 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
+                            <span className="absolute z-[9999] -top-40 left-1/2 -translate-x-1/2 rounded-md bg-gray-800 px-3 py-2 text-xs text-white hidden group-hover:block group-hover:opacity-100 transition-opacity w-full whitespace-normal break-words">
                                 {isProfileComplete
                                     ? "Lorsque vous publiez votre profil, il sera visible par tous les mariés parcourant la liste de prestataires publiés sur notre plateforme."
                                     : "⚠️ Vous devez compléter toutes les informations (logo, description, contact et au moins un service) avant de pouvoir publier votre profil."
