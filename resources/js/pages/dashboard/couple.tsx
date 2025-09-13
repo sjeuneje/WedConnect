@@ -1,12 +1,14 @@
 import {Head} from "@inertiajs/react";
+import CoupleDashboardLayout from "@/layouts/couple-dashboard";
 
-export default function DashboardCouple() {
+export default function DashboardCouple({ user, currentRoute }) {
+    console.log(user);
     return (
         <>
             <Head title="Mon tableau de bord" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-                Tableau de bord (couple).
-            </div>
+            <CoupleDashboardLayout currentRoute={currentRoute}>
+                <h1 className="text-[14px]">Bonjour <span className="font-semibold">{user?.couple?.name}</span>.</h1>
+            </CoupleDashboardLayout>
         </>
     )
 }

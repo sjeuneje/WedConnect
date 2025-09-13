@@ -1,11 +1,8 @@
 import {Head, usePage} from "@inertiajs/react";
-import DashboardLayout from "@/layouts/dashboard";
-import DashboardSettingsNavigation from "@/components/dashboard/settings/navigation";
-import {dashboardSettingsPages} from "@/data/provider/dashboardSettingsPages";
+import CoupleDashboardLayout from "@/layouts/couple-dashboard";
 import {useState} from "react";
+import {dashboardSettingsPages} from "@/data/provider/dashboardSettingsPages";
 import SettingsUserTabProvider from "@/pages/dashboard/settings/user";
-import SettingsActivityTabProvider from "@/pages/dashboard/provider/settings/activity";
-import { SuccessBanner } from "@/components/ui/success-banner";
 
 type Tab = {
     id: string;
@@ -15,7 +12,7 @@ type Tab = {
     desc: string;
 }
 
-export default function SettingsProvider({ user, currentRoute, errors }) {
+export default function SettingsCouple({ user, currentRoute, errors }) {
     const { flash } = usePage().props;
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams);
@@ -33,14 +30,11 @@ export default function SettingsProvider({ user, currentRoute, errors }) {
     return (
         <>
             <Head title="Paramètres" />
-            <DashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
-                <SuccessBanner key={user.updated_at} message={flash?.success} />
+            <CoupleDashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
                 <h1 className="text-[14px] font-semibold mb-2">Gestion des paramètres <span className="text-gray-500">({currentTab.name})</span></h1>
                 <p className="text-[12px] text-gray-500 max-w-[500px] mb-4">{currentTab.desc}</p>
-                <DashboardSettingsNavigation pages={dashboardSettingsPages} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                 {currentTab.id === 'user' && <SettingsUserTabProvider user={user} errors={errors} />}
-                {currentTab.id === 'activity' && <SettingsActivityTabProvider user={user} errors={errors} />}
-            </DashboardLayout>
+            </CoupleDashboardLayout>
         </>
     )
 }

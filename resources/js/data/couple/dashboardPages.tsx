@@ -1,31 +1,31 @@
-import {Home, Activity, Briefcase, Settings, LogOut, List} from "lucide-react";
+import {Home, Settings, LogOut, List, ClipboardList} from "lucide-react";
 import type { Page } from "@/types";
 
 export const dashboardPages: Page[] = [
     {
         name: 'Tableau de bord',
-        href: 'dashboard.provider',
+        href: 'dashboard.couple',
         icon: <Home />,
         showOnDesktop: true,
         method: 'get'
     },
     {
-        name: 'Mon activité',
-        href: 'dashboard.provider.activity',
-        icon: <Activity />,
+        name: 'Mon mariage',
+        href: 'dashboard.couple',
+        icon: <ClipboardList />,
         showOnDesktop: true,
         method: 'get'
     },
     {
-        name: 'Mes services',
-        href: 'dashboard.provider.services',
-        icon: <Briefcase />,
+        name: 'Liste prestataires',
+        href: 'dashboard.couple',
+        icon: <List />,
         showOnDesktop: true,
         method: 'get'
     },
     {
         name: 'Paramètres',
-        href: 'dashboard.provider.settings',
+        href: 'dashboard.couple.settings',
         icon: <Settings />,
         showOnDesktop: true,
         method: 'get'

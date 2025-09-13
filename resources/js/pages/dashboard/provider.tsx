@@ -8,7 +8,7 @@ export default function DashboardProvider({ user, currentRoute }: Props) {
     return (
         <>
             <Head title="Tableau de bord" />
-            <DashboardLayout currentRoute={currentRoute}>
+            <DashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
                 <h1 className="text-[14px]">Bonjour <span className="font-semibold">{user.provider.company_name}</span>.</h1>
             </DashboardLayout>
         </>

@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Provider::class);
     }
+
+    public function couple(): HasOne
+    {
+        return $this->hasOne(Couple::class);
+    }
 }

@@ -53,7 +53,7 @@ export default function ServicesProvider({
     return (
         <>
             <Head title="Services" />
-            <DashboardLayout currentRoute={currentRoute}>
+            <DashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
                 {flash?.success && (
                     <SuccessBanner key={flash.success} message={flash.success} />
                 )}

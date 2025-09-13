@@ -20,7 +20,7 @@ export default function SettingsUserTabProvider({ user, errors }) {
     });
 
     const updateUser = () => {
-        form.patch(route('dashboard.provider.settings.user'));
+        form.patch(route('dashboard.user'));
     }
 
     return (

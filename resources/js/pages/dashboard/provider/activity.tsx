@@ -35,7 +35,7 @@ export default function ActivityProvider({ user, currentRoute, billingUnits, fla
     return (
         <>
             <Head title="Mon activité" />
-            <DashboardLayout currentRoute={currentRoute}>
+            <DashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
                 <SuccessBanner key={flash.success} message={flash.success} />
 
                 <h1 className="text-[14px] font-semibold mb-2">Visualisez le profil de votre activité</h1>
