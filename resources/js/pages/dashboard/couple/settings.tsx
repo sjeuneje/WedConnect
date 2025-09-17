@@ -30,7 +30,7 @@ export default function SettingsCouple({ user, currentRoute, errors }) {
     return (
         <>
             <Head title="Paramètres" />
-            <CoupleDashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.provider.settings')}>
+            <CoupleDashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.couple.settings')}>
                 <h1 className="text-[14px] font-semibold mb-2">Gestion des paramètres <span className="text-gray-500">({currentTab.name})</span></h1>
                 <p className="text-[12px] text-gray-500 max-w-[500px] mb-4">{currentTab.desc}</p>
                 {currentTab.id === 'user' && <SettingsUserTabProvider user={user} errors={errors} />}

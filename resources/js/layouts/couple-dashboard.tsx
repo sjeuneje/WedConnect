@@ -4,7 +4,7 @@ import {dashboardPages} from "@/data/couple/dashboardPages";
 import {Page} from "@/types";
 import {useEffect, useState} from "react";
 
-export default function CoupleDashboardLayout({ currentRoute, children }) {
+export default function CoupleDashboardLayout({ parametersHref, currentRoute, children }) {
     const pages = dashboardPages;
 
     const getCurrentPage = (): Page => {
@@ -28,7 +28,7 @@ export default function CoupleDashboardLayout({ currentRoute, children }) {
 
     return (
         <>
-            <Topbar currentPage={currentPage} showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+            <Topbar currentPage={currentPage} showSidebar={showSidebar} setShowSidebar={setShowSidebar} parametersHref={parametersHref} />
             <Sidebar show={showSidebar} setShow={setShowSidebar} logoHref={route('dashboard.couple')} currentPage={currentPage} pages={pages} />
             <main className="ml-0 md:ml-[250px] mt-[75px] h-[calc(100vh-100px)] overflow-auto p-4 bg-[#FDFDFC] opacity-100 transition-opacity duration-750 grow starting:opacity-0">
                 {children}

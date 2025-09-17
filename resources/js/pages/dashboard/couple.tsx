@@ -6,7 +6,7 @@ export default function DashboardCouple({ user, currentRoute }) {
     return (
         <>
             <Head title="Mon tableau de bord" />
-            <CoupleDashboardLayout currentRoute={currentRoute}>
+            <CoupleDashboardLayout currentRoute={currentRoute} parametersHref={route('dashboard.couple.settings')}>
                 <h1 className="text-[14px]">Bonjour <span className="font-semibold">{user?.couple?.name}</span>.</h1>
             </CoupleDashboardLayout>
         </>
