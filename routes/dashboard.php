@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Couple\Dashboard\DashboardCoupleController;
 use App\Http\Controllers\Couple\Settings\SettingsCoupleController;
+use App\Http\Controllers\ListingProviders;
 use App\Http\Controllers\Provider\Activity\ActivityProviderController;
 use App\Http\Controllers\Provider\Dashboard\DashboardProviderController;
 use App\Http\Controllers\Provider\Services\ServicesProviderController;
@@ -43,5 +44,7 @@ Route::middleware('auth')->group(function () {
                Route::get('', [SettingsCoupleController::class, 'index'])->name('dashboard.couple.settings');
             });
         });
+
+        Route::get('listing-providers', [ListingProviders::class, 'index'])->name('dashboard.listing-providers');
     });
 });

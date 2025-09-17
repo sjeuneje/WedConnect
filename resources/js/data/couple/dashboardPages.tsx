@@ -18,7 +18,7 @@ export const dashboardPages: Page[] = [
     },
     {
         name: 'Liste prestataires',
-        href: 'dashboard.couple',
+        href: 'dashboard.listing-providers',
         icon: <List />,
         showOnDesktop: true,
         method: 'get'
