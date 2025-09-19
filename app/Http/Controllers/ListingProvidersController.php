@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Couples\Providers\CoupleProviderFavorite;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ListingProvidersController extends Controller
@@ -36,6 +38,13 @@ class ListingProvidersController extends Controller
                 $query->whereNotNull('published_at');
             })
             ->findOrFail($id);
+
+        $user->provider->is_favorite_tagged = CoupleProviderFavorite::query()
+            ->where([
+                'couple_id' => Auth::user()->couple->id,
+                'provider_id' => $user->provider->id
+            ])
+            ->exists();
 
         if (!$user->provider) {
             abort(400, "Vous ne pouvez pas voir le profil de ce genre d'utilisateur.");

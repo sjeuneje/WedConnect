@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('providers')->group(function () {
                 Route::prefix('favorite')->group(function () {
                     Route::post('', [FavoriteController::class, 'store'])->name('dashboard.couple.providers.favorite');
+                    Route::delete('', [FavoriteController::class, 'delete'])->name('dashboard.couple.providers.favorite');
                 });
             });
         });
