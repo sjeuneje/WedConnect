@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Couple\Dashboard\DashboardCoupleController;
+use App\Http\Controllers\Couple\Providers\FavoriteController;
 use App\Http\Controllers\Couple\Settings\SettingsCoupleController;
-use App\Http\Controllers\ListingProviders;
+use App\Http\Controllers\ListingProvidersController;
 use App\Http\Controllers\Provider\Activity\ActivityProviderController;
 use App\Http\Controllers\Provider\Dashboard\DashboardProviderController;
 use App\Http\Controllers\Provider\Services\ServicesProviderController;
@@ -43,8 +44,17 @@ Route::middleware('auth')->group(function () {
             Route::prefix('settings')->group(function () {
                Route::get('', [SettingsCoupleController::class, 'index'])->name('dashboard.couple.settings');
             });
+
+            Route::prefix('providers')->group(function () {
+                Route::prefix('favorite')->group(function () {
+                    Route::post('', [FavoriteController::class, 'store'])->name('dashboard.couple.providers.favorite');
+                });
+            });
         });
 
-        Route::get('listing-providers', [ListingProviders::class, 'index'])->name('dashboard.listing-providers');
+        Route::prefix('listing-providers')->group(function () {
+            Route::get('', [ListingProvidersController::class, 'index'])->name('dashboard.listing-providers.index');
+            Route::get('{id}', [ListingProvidersController::class, 'show'])->name('dashboard.listing-providers.show');
+        });
     });
 });

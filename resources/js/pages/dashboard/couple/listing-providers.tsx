@@ -25,7 +25,7 @@ export default function ListingProviders({ currentRoute, providers }) {
 
                         return (
                             <a
-                                href={route('dashboard.listing-providers')}
+                                href={route('dashboard.listing-providers.show', provider.id)}
                                 key={key}
                                 className="flex flex-col w-full md:w-[300px] xl:w-[650px] rounded-xl border border-gray-200 h-[300px] xl:h-[200px] shadow-md hover:shadow-xl duration-300"
                             >

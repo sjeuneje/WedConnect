@@ -18,10 +18,13 @@ export const dashboardPages: Page[] = [
     },
     {
         name: 'Liste prestataires',
-        href: 'dashboard.listing-providers',
+        href: 'dashboard.listing-providers.index',
         icon: <List />,
         showOnDesktop: true,
-        method: 'get'
+        method: 'get',
+        children: {
+            name: 'Profile de ',
+        }
     },
     {
         name: 'Paramètres',
