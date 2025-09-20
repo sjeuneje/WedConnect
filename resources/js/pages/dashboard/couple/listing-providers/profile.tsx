@@ -30,7 +30,9 @@ export default function ProviderProfile({ user, billingUnits, flash }) {
 
                 <Link
                     className="flex items-center gap-x-1 text-[13px] text-gray-500 hover:underline duration-300"
-                    href={route('dashboard.listing-providers.index')}
+                    onClick={() => {
+                        history.back();
+                    }}
                 >
                     <ArrowLeft className="size-4" />
                     Retour

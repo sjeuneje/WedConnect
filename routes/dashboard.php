@@ -3,6 +3,7 @@
 use App\Http\Controllers\Couple\Dashboard\DashboardCoupleController;
 use App\Http\Controllers\Couple\Providers\FavoriteController;
 use App\Http\Controllers\Couple\Settings\SettingsCoupleController;
+use App\Http\Controllers\Couple\Wedding\WeddingCoupleController;
 use App\Http\Controllers\ListingProvidersController;
 use App\Http\Controllers\Provider\Activity\ActivityProviderController;
 use App\Http\Controllers\Provider\Dashboard\DashboardProviderController;
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('couple')->group(function () {
             Route::get('', [DashboardCoupleController::class, 'index'])->name('dashboard.couple');
+
+            Route::prefix('wedding')->group(function () {
+               Route::get('', [WeddingCoupleController::class, 'index'])->name('dashboard.couple.wedding');
+               Route::patch('', [WeddingCoupleController::class, 'update'])->name('dashboard.couple.wedding.update');
+            });
 
             Route::prefix('settings')->group(function () {
                Route::get('', [SettingsCoupleController::class, 'index'])->name('dashboard.couple.settings');

@@ -10,8 +10,8 @@ export const dashboardPages: Page[] = [
         method: 'get'
     },
     {
-        name: 'Mon mariage',
-        href: 'dashboard.couple',
+        name: 'Notre mariage',
+        href: 'dashboard.couple.wedding',
         icon: <ClipboardList />,
         showOnDesktop: true,
         method: 'get'
@@ -21,10 +21,7 @@ export const dashboardPages: Page[] = [
         href: 'dashboard.listing-providers.index',
         icon: <List />,
         showOnDesktop: true,
-        method: 'get',
-        children: {
-            name: 'Profile de ',
-        }
+        method: 'get'
     },
     {
         name: 'Paramètres',
